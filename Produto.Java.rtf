@@ -1,52 +1,58 @@
-import java.util.Scanner;
 
-public class Main {
-    public static void main(String[] args){
-        Scanner teclado = new Scanner(System.in);
-        Produto produtos[] = new Produto[3];
+public class Produto {
+	 private String nome;
+	    private int quantEstoque;
+	    private double valor;
+	    
+	    public Produto(String nome, int quantEstoque, double valor) {
+	        this.nome = nome;
+	        this.quantEstoque = quantEstoque;
+	        this.valor = valor; 
+	    }
 
-        produtos[0] = new Produto("Camiseta ", 25, 320);
-        produtos[1] = new Produto("Calça ", 45, 250);
-        produtos[2] = new Produto("Short ", 72, 239);
+	    public String getNome() {
+	        return nome;
+	    }
 
-    	// parte 1	
-        
-        System.out.println("Digite o código do produto: ");
-        int codigo = teclado.nextInt();
-        if(codigo > 2 || codigo < 0) {
-        	System.out.println("Código inválido, tente novamente.");
-        	System.exit(0);
-        }
-        System.out.println("Digite a quantidade a ser adicionada: ");
-        int quantidade = teclado.nextInt();
-        produtos[codigo].adicionaEstoque(quantidade);
-        produtos[codigo].imprimeInventario();
-        
-        System.out.println("Digite o código do produto: ");
-        codigo = teclado.nextInt();
-        if(codigo > 2 || codigo < 0) {
-        	System.out.println("Código inválido, tente novamente.");
-        	System.exit(0);
-        }
-        System.out.println("Digite a quantidade a ser adicionada: ");
-        quantidade = teclado.nextInt();
-        produtos[codigo].adicionaEstoque(quantidade);
-        produtos[codigo].imprimeInventario();
-        
-        System.out.println("Digite o código do produto: ");
-        codigo = teclado.nextInt();
-        if(codigo > 2 || codigo < 0) {
-        	System.out.println("Código inválido, tente novamente.");
-        	System.exit(0);
-        }
-        System.out.println("Digite a quantidade a ser adicionada: ");
-        quantidade = teclado.nextInt();
-        produtos[codigo].adicionaEstoque(quantidade);
-        produtos[codigo].imprimeInventario();
-        
-        // partes 2 & 3
-        for (int i = 0; i < produtos.length; i++) {
-            produtos[i].imprimeInventario();
-        }
-    }
+	    public void setNome(String nome) {
+	        this.nome = nome;
+	    }
+
+	    public int getQuantEstoque() {
+	        return quantEstoque;
+	    }
+
+	    public void setQuantEstoque(int quantEstoque) {
+	        this.quantEstoque = quantEstoque;
+	    }
+
+	    public double getValor() {
+	        return valor;
+	    }
+
+	    public void setValor(double valor) {
+	        this.valor = valor;
+	    }
+	    
+	    // Coloca uma quantidade de "produtos" em estoque 
+	    public void adicionaEstoque(int quantidade){
+	        this.quantEstoque += quantidade; 
+	    }
+	    
+	    // Serve para retirar uma certa quantidade de "produtos" em estoque, caso não seja possível então ele mostra um alerta. 
+	    public void baixaEstoque(int quantidade) {
+	        if(quantidade > this.quantEstoque) {
+	            System.out.println("Quantidade em estoque insuficiente.");
+	        }
+	        else {
+	            this.quantEstoque -= quantidade; 
+	        }
+	    }
+	    
+	    // Imprime os dados dos produtos 	
+	    public void imprimeInvetario(){
+	        System.out.println("Nome: " + this.nome);
+	        System.out.println("Quantidade em estoque: " + this.quantEstoque);
+	        System.out.println("Valor:R$: " + this.valor);
+	    }
 }
